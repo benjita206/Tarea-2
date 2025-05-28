@@ -1,0 +1,255 @@
+package unab.cl.info.tarea_2.Prueba.backend;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ControladorExamen {
+    private ArrayList<Item> preguntas;
+    private ArrayList<Integer> respuestasUsuario;
+    private ArrayList<String> justificaciones;
+    private int preguntaActual;
+    private boolean examenTerminado;
+
+    public ControladorExamen(ArrayList<Item> preguntas) {
+        this.preguntas = preguntas;
+        this.respuestasUsuario = new ArrayList<>();
+        this.justificaciones = new ArrayList<>();
+        this.preguntaActual = 0;
+        this.examenTerminado = false;
+
+        // Inicializar arrays con valores por defecto
+        for (int i = 0; i < preguntas.size(); i++) {
+            respuestasUsuario.add(-1); // -1 indica sin respuesta
+            justificaciones.add("");
+        }
+    }
+
+    public Item getPreguntaActual() {
+        if (preguntaActual >= 0 && preguntaActual < preguntas.size()) {
+            return preguntas.get(preguntaActual);
+        }
+        return null;
+    }
+
+    public int getIndicePreguntaActual() {
+        return preguntaActual;
+    }
+
+    public int getTotalPreguntas() {
+        return preguntas.size();
+    }
+
+    public boolean puedeRetroceder() {
+        return preguntaActual > 0;
+    }
+
+    public boolean puedeAvanzar() {
+        return preguntaActual < preguntas.size() - 1;
+    }
+
+    public boolean esUltimaPregunta() {
+        return preguntaActual == preguntas.size() - 1;
+    }
+
+    public boolean esPrimeraPregunta() {
+        return preguntaActual == 0;
+    }
+
+    public void avanzar() {
+        if (puedeAvanzar()) {
+            preguntaActual++;
+        }
+    }
+
+    public void retroceder() {
+        if (puedeRetroceder()) {
+            preguntaActual--;
+        }
+    }
+
+    public void irAPregunta(int indice) {
+        if (indice >= 0 && indice < preguntas.size()) {
+            preguntaActual = indice;
+        }
+    }
+
+    public void guardarRespuesta(int respuesta) {
+        if (preguntaActual >= 0 && preguntaActual < respuestasUsuario.size()) {
+            respuestasUsuario.set(preguntaActual, respuesta);
+        }
+    }
+
+    public void guardarJustificacion(String justificacion) {
+        if (preguntaActual >= 0 && preguntaActual < justificaciones.size()) {
+            justificaciones.set(preguntaActual, justificacion);
+        }
+    }
+
+    public Integer getRespuestaActual() {
+        if (preguntaActual >= 0 && preguntaActual < respuestasUsuario.size()) {
+            return respuestasUsuario.get(preguntaActual);
+        }
+        return -1;
+    }
+
+    public String getJustificacionActual() {
+        if (preguntaActual >= 0 && preguntaActual < justificaciones.size()) {
+            return justificaciones.get(preguntaActual);
+        }
+        return "";
+    }
+
+    public boolean todasLasPreguntasRespondidas() {
+        for (Integer respuesta : respuestasUsuario) {
+            if (respuesta == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void terminarExamen() {
+        this.examenTerminado = true;
+    }
+
+    public boolean isExamenTerminado() {
+        return examenTerminado;
+    }
+
+    public EstadisticasExamen calcularEstadisticas() {
+        EstadisticasExamen stats = new EstadisticasExamen();
+
+        int correctasTotal = 0;
+        Map<Integer, Integer> correctasPorNivel = new HashMap<>();
+        Map<Integer, Integer> totalPorNivel = new HashMap<>();
+        Map<Integer, Integer> correctasPorTipo = new HashMap<>();
+        Map<Integer, Integer> totalPorTipo = new HashMap<>();
+
+        // Inicializar contadores
+        for (int i = 1; i <= 6; i++) {
+            correctasPorNivel.put(i, 0);
+            totalPorNivel.put(i, 0);
+        }
+        for (int i = 1; i <= 2; i++) {
+            correctasPorTipo.put(i, 0);
+            totalPorTipo.put(i, 0);
+        }
+
+        // Calcular estadísticas
+        for (int i = 0; i < preguntas.size(); i++) {
+            Item pregunta = preguntas.get(i);
+            Integer respuesta = respuestasUsuario.get(i);
+
+            if (respuesta != -1) {
+                boolean esCorrecta = respuesta == pregunta.getOpcionCorrecta();
+
+                if (esCorrecta) {
+                    correctasTotal++;
+                    correctasPorNivel.put(pregunta.getNivelTaxonomico(),
+                            correctasPorNivel.get(pregunta.getNivelTaxonomico()) + 1);
+                    correctasPorTipo.put(pregunta.getTipoPregunta(),
+                            correctasPorTipo.get(pregunta.getTipoPregunta()) + 1);
+                }
+
+                totalPorNivel.put(pregunta.getNivelTaxonomico(),
+                        totalPorNivel.get(pregunta.getNivelTaxonomico()) + 1);
+                totalPorTipo.put(pregunta.getTipoPregunta(),
+                        totalPorTipo.get(pregunta.getTipoPregunta()) + 1);
+            }
+        }
+
+        // Establecer resultados
+        stats.setPorcentajeTotal((double) correctasTotal / preguntas.size() * 100);
+        stats.setCorrectasTotal(correctasTotal);
+        stats.setTotalPreguntas(preguntas.size());
+
+        // Porcentajes por nivel taxonómico
+        for (int i = 1; i <= 6; i++) {
+            if (totalPorNivel.get(i) > 0) {
+                double porcentaje = (double) correctasPorNivel.get(i) / totalPorNivel.get(i) * 100;
+                stats.setPorcentajePorNivel(i, porcentaje);
+            }
+        }
+
+        // Porcentajes por tipo
+        for (int i = 1; i <= 2; i++) {
+            if (totalPorTipo.get(i) > 0) {
+                double porcentaje = (double) correctasPorTipo.get(i) / totalPorTipo.get(i) * 100;
+                stats.setPorcentajePorTipo(i, porcentaje);
+            }
+        }
+
+        return stats;
+    }
+
+    public ArrayList<Integer> getRespuestasUsuario() {
+        return respuestasUsuario;
+    }
+
+    public ArrayList<String> getJustificaciones() {
+        return justificaciones;
+    }
+}
+
+class EstadisticasExamen {
+    private double porcentajeTotal;
+    private int correctasTotal;
+    private int totalPreguntas;
+    private Map<Integer, Double> porcentajesPorNivel;
+    private Map<Integer, Double> porcentajesPorTipo;
+
+    public EstadisticasExamen() {
+        this.porcentajesPorNivel = new HashMap<>();
+        this.porcentajesPorTipo = new HashMap<>();
+    }
+
+    // Getters y Setters
+    public double getPorcentajeTotal() {
+        return porcentajeTotal;
+    }
+
+    public void setPorcentajeTotal(double porcentajeTotal) {
+        this.porcentajeTotal = porcentajeTotal;
+    }
+
+    public int getCorrectasTotal() {
+        return correctasTotal;
+    }
+
+    public void setCorrectasTotal(int correctasTotal) {
+        this.correctasTotal = correctasTotal;
+    }
+
+    public int getTotalPreguntas() {
+        return totalPreguntas;
+    }
+
+    public void setTotalPreguntas(int totalPreguntas) {
+        this.totalPreguntas = totalPreguntas;
+    }
+
+    public void setPorcentajePorNivel(int nivel, double porcentaje) {
+        porcentajesPorNivel.put(nivel, porcentaje);
+    }
+
+    public double getPorcentajePorNivel(int nivel) {
+        return porcentajesPorNivel.getOrDefault(nivel, 0.0);
+    }
+
+    public void setPorcentajePorTipo(int tipo, double porcentaje) {
+        porcentajesPorTipo.put(tipo, porcentaje);
+    }
+
+    public double getPorcentajePorTipo(int tipo) {
+        return porcentajesPorTipo.getOrDefault(tipo, 0.0);
+    }
+
+    public Map<Integer, Double> getPorcentajesPorNivel() {
+        return porcentajesPorNivel;
+    }
+
+    public Map<Integer, Double> getPorcentajesPorTipo() {
+        return porcentajesPorTipo;
+    }
+}

@@ -3,20 +3,60 @@ package unab.cl.info.tarea_2.Prueba.backend;
 import java.util.ArrayList;
 
 public class Item {
-    private String enunciado;
-    private int nivelTaxonomico;
-    private int tipoPregunta;
-    private ArrayList<String> opciones;
-    private int opcionCorrecta;
+    protected String enunciado;
+    protected int nivelTaxonomico;
+    protected int tipoPregunta; // 1 = Alternativas, 2 = Verdadero/Falso
+    protected int cantidadAlternativas;
+    protected String alternativas; // String con alternativas separadas por algún delimitador
+    protected int opcionCorrecta;
+    protected String tiempo;
+    protected ArrayList<String> opciones;
 
-    public Item(String enunciado, int nivelTaxonomico, int tipoPregunta, ArrayList<String> opciones, int opcionCorrecta) {
+    // Constructor que coincide con el llamado desde Archivos
+    public Item(String enunciado, int nivelTaxonomico, int tipoPregunta,
+                int cantidadAlternativas, String alternativas, int opcionCorrecta, String tiempo) {
         this.enunciado = enunciado;
         this.nivelTaxonomico = nivelTaxonomico;
         this.tipoPregunta = tipoPregunta;
-        this.opciones = new ArrayList<>();
+        this.cantidadAlternativas = cantidadAlternativas;
+        this.alternativas = alternativas;
         this.opcionCorrecta = opcionCorrecta;
+        this.tiempo = tiempo;
+        this.opciones = new ArrayList<>();
+
+        // Procesar alternativas
+        if (alternativas != null && !alternativas.isEmpty()) {
+            String[] altArray = alternativas.split(","); // Asumiendo que están separadas por comas
+            for (String alt : altArray) {
+                this.opciones.add(alt.trim());
+            }
+        }
+
+        // Si es verdadero/falso y no hay alternativas específicas, agregar V/F
+        if (tipoPregunta == 2 && this.opciones.isEmpty()) {
+            this.opciones.add("Verdadero");
+            this.opciones.add("Falso");
+        }
     }
 
+    // Constructor alternativo
+    public Item(String enunciado, int nivelTaxonomico, int tipoPregunta,
+                ArrayList<String> opciones, int opcionCorrecta) {
+        this.enunciado = enunciado;
+        this.nivelTaxonomico = nivelTaxonomico;
+        this.tipoPregunta = tipoPregunta;
+        this.opciones = new ArrayList<>(opciones);
+        this.opcionCorrecta = opcionCorrecta;
+        this.cantidadAlternativas = opciones.size();
+        this.tiempo = "300"; // tiempo por defecto
+    }
+
+    // Constructor vacío
+    public Item() {
+        this.opciones = new ArrayList<>();
+    }
+
+    // Getters y Setters
     public String getEnunciado() {
         return enunciado;
     }
@@ -32,7 +72,6 @@ public class Item {
     public void setNivelTaxonomico(int nivelTaxonomico) {
         this.nivelTaxonomico = nivelTaxonomico;
     }
-
 
     public int getTipoPregunta() {
         return tipoPregunta;
@@ -50,7 +89,6 @@ public class Item {
         this.opcionCorrecta = opcionCorrecta;
     }
 
-
     public ArrayList<String> getOpciones() {
         return opciones;
     }
@@ -59,5 +97,43 @@ public class Item {
         this.opciones = opciones;
     }
 
+    public String getTiempo() {
+        return tiempo;
+    }
 
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public int getCantidadAlternativas() {
+        return cantidadAlternativas;
+    }
+
+    public void setCantidadAlternativas(int cantidadAlternativas) {
+        this.cantidadAlternativas = cantidadAlternativas;
+    }
+
+    public String getAlternativas() {
+        return alternativas;
+    }
+
+    public void setAlternativas(String alternativas) {
+        this.alternativas = alternativas;
+    }
+
+    public String getTipoPreguntatexto() {
+        return tipoPregunta == 1 ? "Alternativas" : "Verdadero/Falso";
+    }
+
+    public String getNivelTaxonomicoTexto() {
+        switch (nivelTaxonomico) {
+            case 1: return "Conocimiento";
+            case 2: return "Comprensión";
+            case 3: return "Aplicación";
+            case 4: return "Análisis";
+            case 5: return "Síntesis";
+            case 6: return "Evaluación";
+            default: return "No especificado";
+        }
+    }
 }

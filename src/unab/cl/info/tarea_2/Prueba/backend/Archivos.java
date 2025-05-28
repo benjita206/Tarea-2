@@ -11,25 +11,90 @@ public class Archivos {
         items = new ArrayList<>();
         this.abrirArchivo();
     }
+
+    public Archivos(String nombreArchivo) {
+        items = new ArrayList<>();
+        this.abrirArchivo(nombreArchivo);
+    }
+
     public ArrayList<Item> getItems() {
         return items;
     }
+
     public void abrirArchivo() {
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("archivos.txt"));
+        abrirArchivo("archivos.txt");
+    }
+
+    public void abrirArchivo(String nombreArchivo) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
             String linea = br.readLine();
+
             while (linea != null) {
-                String[] datos = linea.split(";");
-                Item nuevoItem = new Item(datos[0], Integer.parseInt(datos[1]), Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), datos[4], Integer.parseInt(datos[5]), datos[6]);
-                this.items.add(nuevoItem);
+                if (!linea.trim().isEmpty()) {
+                    String[] datos = linea.split(";");
+
+                    if (datos.length >= 7) {
+                        String enunciado = datos[0];
+                        int nivelTaxonomico = Integer.parseInt(datos[1]);
+                        int tipoPregunta = Integer.parseInt(datos[2]);
+                        int cantidadAlternativas = Integer.parseInt(datos[3]);
+                        String alternativas = datos[4];
+                        int opcionCorrecta = Integer.parseInt(datos[5]);
+                        String tiempo = datos[6];
+
+                        Item nuevoItem;
+
+                        // Crear el tipo de item apropiado
+                        if (tipoPregunta == 1) {
+                            // Alternativas
+                            nuevoItem = new Alternativas(enunciado, nivelTaxonomico, tipoPregunta,
+                                    cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
+                        } else if (tipoPregunta == 2) {
+                            // Verdadero/Falso
+                            nuevoItem = new VerdaderoFalso(enunciado, nivelTaxonomico, tipoPregunta,
+                                    cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
+                        } else {
+                            // Item genérico
+                            nuevoItem = new Item(enunciado, nivelTaxonomico, tipoPregunta,
+                                    cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
+                        }
+
+                        this.items.add(nuevoItem);
+                    }
+                }
                 linea = br.readLine();
-
-
             }
-        }
-        catch(Exception e){
-            System.out.println("Error al abrir el archivo.\n");
-        }
+            br.close();
 
+        } catch (Exception e) {
+            System.out.println("Error al abrir el archivo: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public int getTotalItems() {
+        return items.size();
+    }
+
+    public Item getItem(int indice) {
+        if (indice >= 0 && indice < items.size()) {
+            return items.get(indice);
+        }
+        return null;
+    }
+
+    public void mostrarItems() {
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            System.out.println("Item " + (i + 1) + ":");
+            System.out.println("  Enunciado: " + item.getEnunciado());
+            System.out.println("  Nivel Taxonómico: " + item.getNivelTaxonomicoTexto());
+            System.out.println("  Tipo: " + item.getTipoPreguntatexto());
+            System.out.println("  Opciones: " + item.getOpciones());
+            System.out.println("  Respuesta correcta: " + item.getOpcionCorrecta());
+            System.out.println("  Tiempo: " + item.getTiempo());
+            System.out.println();
+        }
     }
 }
