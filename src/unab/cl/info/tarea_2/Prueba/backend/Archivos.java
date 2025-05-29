@@ -55,7 +55,7 @@ public class Archivos {
                             nuevoItem = new VerdaderoFalso(enunciado, nivelTaxonomico, tipoPregunta,
                                     cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
                         } else {
-                            // Item genérico
+                            // Item genérico (assuming Item's constructor can handle these parameters)
                             nuevoItem = new Item(enunciado, nivelTaxonomico, tipoPregunta,
                                     cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
                         }

@@ -1,0 +1,10 @@
+¿Cuál es la capital de Chile?;1;1;4;Santiago,Valparaíso,Concepción,Antofagasta;1;60
+El proceso de fotosíntesis libera oxígeno como subproducto.;2;2;2;Verdadero,Falso;1;45
+Si un programa lanza una excepción, ¿qué bloque se utiliza para manejarla?;3;1;3;try,catch,finally,throw;2;90
+Analice las causas de la inflación en un país en desarrollo.;4;1;4;Alta demanda,Baja oferta,Devaluación monetaria,Todas las anteriores;4;120
+La Segunda Guerra Mundial comenzó en 1939.;1;2;2;Verdadero,Falso;1;30
+¿Qué tipo de estructura de datos se utiliza para implementar una cola?;3;1;4;Pila,Árbol,Lista,Cola;4;75
+Evalúe la efectividad de las políticas de cuarentena durante una pandemia.;6;2;2;Verdadero,Falso;1;180
+Sintetice un algoritmo para ordenar un arreglo de números enteros de forma ascendente.;5;1;3;Quicksort,Mergesort,Bubble Sort,Todos los anteriores son algoritmos de ordenamiento;4;150
+¿Qué comando de SQL se utiliza para recuperar datos de una base de datos?;1;1;3;INSERT,UPDATE,SELECT,DELETE;3;60
+El calentamiento global es causado exclusivamente por factores naturales.;2;2;2;Verdadero,Falso;2;90

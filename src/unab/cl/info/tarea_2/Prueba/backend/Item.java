@@ -105,6 +105,11 @@ public class Item {
         this.tiempo = tiempo;
     }
 
+    public void iniciarTemporizador(){
+        // This method is currently empty.
+        // If it's meant to initiate a timer, its implementation would go here.
+    }
+
     public int getCantidadAlternativas() {
         return cantidadAlternativas;
     }
