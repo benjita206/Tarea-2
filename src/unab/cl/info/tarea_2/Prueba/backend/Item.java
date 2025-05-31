@@ -3,14 +3,14 @@ package unab.cl.info.tarea_2.Prueba.backend;
 import java.util.ArrayList;
 
 public class Item {
-    protected String enunciado;
-    protected int nivelTaxonomico;
-    protected int tipoPregunta; // 1 = Alternativas, 2 = Verdadero/Falso
-    protected int cantidadAlternativas;
-    protected String alternativas; // String con alternativas separadas por algún delimitador
-    protected int opcionCorrecta;
-    protected String tiempo;
-    protected ArrayList<String> opciones;
+    private String enunciado;
+    private int nivelTaxonomico;
+    private int tipoPregunta; // 1 = Alternativas, 2 = Verdadero/Falso
+    private int cantidadAlternativas;
+    private String alternativas; // String con alternativas separadas por algún delimitador
+    private int opcionCorrecta;
+    private String tiempo;
+    private ArrayList<String> opciones;
 
     // Constructor que coincide con el llamado desde Archivos
     public Item(String enunciado, int nivelTaxonomico, int tipoPregunta,

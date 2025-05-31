@@ -44,6 +44,11 @@ public class ControladorExamen {
         return preguntas.size();
     }
 
+    // Nuevo getter para que PanelPrincipal pueda acceder a todas las preguntas
+    public ArrayList<Item> getPreguntas() {
+        return preguntas;
+    }
+
     public boolean puedeRetroceder() {
         return preguntaActual > 0;
     }
@@ -142,7 +147,7 @@ public class ControladorExamen {
 
         // Calcular estadísticas
         for (int i = 0; i < preguntas.size(); i++) {
-            Item pregunta = preguntas.get(i);
+            Item pregunta = preguntas.get(i); // Acceso directo a la lista 'preguntas'
             Integer respuesta = respuestasUsuario.get(i);
 
             if (respuesta != -1) {
@@ -195,4 +200,3 @@ public class ControladorExamen {
         return justificaciones;
     }
 }
-

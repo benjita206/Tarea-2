@@ -83,18 +83,4 @@ public class Archivos {
         }
         return null;
     }
-
-    public void mostrarItems() {
-        for (int i = 0; i < items.size(); i++) {
-            Item item = items.get(i);
-            System.out.println("Item " + (i + 1) + ":");
-            System.out.println("  Enunciado: " + item.getEnunciado());
-            System.out.println("  Nivel Taxonómico: " + item.getNivelTaxonomicoTexto());
-            System.out.println("  Tipo: " + item.getTipoPreguntatexto());
-            System.out.println("  Opciones: " + item.getOpciones());
-            System.out.println("  Respuesta correcta: " + item.getOpcionCorrecta());
-            System.out.println("  Tiempo: " + item.getTiempo());
-            System.out.println();
-        }
-    }
 }

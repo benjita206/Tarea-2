@@ -7,15 +7,15 @@ public class VerdaderoFalso extends Item {
 
     public VerdaderoFalso(String enunciado, int nivelTaxonomico, int opcionCorrecta) {
         super();
-        this.enunciado = enunciado;
-        this.nivelTaxonomico = nivelTaxonomico;
-        this.tipoPregunta = 2; // tipo 2 = verdadero/falso
-        this.opcionCorrecta = opcionCorrecta;
-        this.opciones = new ArrayList<>();
-        this.opciones.add("Verdadero");
-        this.opciones.add("Falso");
-        this.cantidadAlternativas = 2;
-        this.tiempo = "300"; // tiempo por defecto
+        this.setEnunciado(enunciado);
+        this.setNivelTaxonomico(nivelTaxonomico);
+        this.setTipoPregunta(2); // tipo 2 = verdadero/falso
+        this.setOpcionCorrecta(opcionCorrecta);
+        this.setOpciones(new ArrayList<>());
+        this.getOpciones().add("Verdadero");
+        this.getOpciones().add("Falso");
+        this.setCantidadAlternativas(2);
+        this.setTiempo("300"); // tiempo por defecto
         this.justificacion = "";
     }
 

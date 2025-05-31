@@ -1,1 +1,20 @@
-nombre;
+¿Cuál es el planeta más grande de nuestro sistema solar?;1;1;4;Júpiter,Saturno,Neptuno,Tierra;1;60
+La capital de Francia es Berlín.;2;2;2;Verdadero,Falso;2;45
+¿Qué lenguaje de programación se utiliza principalmente para el desarrollo web en el lado del cliente?;3;1;3;Python,Java,JavaScript,C++;3;75
+Analice las implicaciones éticas de la inteligencia artificial en la toma de decisiones autónoma.;4;1;4;Sesgo algorítmico,Responsabilidad legal,Impacto en el empleo,Todas las anteriores;4;120
+El agua hierve a 100 grados Celsius a nivel del mar.;1;2;2;Verdadero,Falso;1;30
+¿Qué estructura de datos sigue el principio LIFO (Last In, First Out)?;3;1;4;Cola,Pila,Árbol,Lista;2;70
+Evalúe la validez del argumento "Todos los cisnes son blancos" tras observar un cisne negro.;6;2;2;Verdadero,Falso;2;180
+Sintetice un plan para mitigar el cambio climático en una ciudad importante.;5;1;3;Reducción de emisiones,Uso de energías renovables,Fomento del transporte público,Todas las anteriores;4;150
+¿Qué tipo de ataque cibernético implica engañar a los usuarios para que revelen información sensible?;1;1;3;DDoS,Malware,Phishing,Ransomware;3;60
+Los mamíferos ponen huevos.;2;2;2;Verdadero,Falso;2;50
+¿Cuál es la función principal del ADN?;1;1;4;Almacenar energía,Transportar oxígeno,Almacenar información genética,Producir proteínas;3;65
+La Luna es un satélite natural de la Tierra.;1;2;2;Verdadero,Falso;1;25
+¿Qué paradigma de programación se basa en el concepto de "objetos"?;3;1;3;Funcional,Lógico,Orientado a objetos,Imperativo;3;80
+Analice las ventajas y desventajas de la globalización económica para los países en desarrollo.;4;1;4;Aumento de la competencia,Transferencia de tecnología,Pérdida de soberanía,Todas las anteriores;4;130
+La gravedad de la Tierra es la misma en cualquier punto de su superficie.;2;2;2;Verdadero,Falso;2;40
+¿Qué método HTTP se usa para solicitar datos de un servidor?;1;1;3;POST,PUT,GET,DELETE;3;55
+Sintetice una estrategia de marketing digital para un nuevo producto ecológico.;5;1;3;Redes sociales,Email marketing,SEO,Todos los anteriores;4;140
+Evalúe la coherencia interna de una teoría científica a partir de sus postulados.;6;2;2;Verdadero,Falso;1;170
+¿Cuál es el significado de la sigla "HTML"?;1;1;4;HyperText Markup Language,High-Level Text Machine Language,Hyperlink and Text Management Language,Home Tool Markup Language;1;50
+El Sol gira alrededor de la Tierra.;2;2;2;Verdadero,Falso;2;35
