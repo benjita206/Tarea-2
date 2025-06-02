@@ -57,8 +57,6 @@ public class PanelPrincipal extends JFrame {
 
         // Mostrar la primera pregunta
         mostrarPreguntaActual();
-        // El temporizador ahora se inicia/reinicia dentro de mostrarPreguntaActual
-        // cuando se carga una nueva pregunta.
     }
 
     private void initializeComponents() {
