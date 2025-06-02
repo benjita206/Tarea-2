@@ -19,8 +19,8 @@ public class PanelPrincipal extends JFrame {
     private JPanel Norte;
     private JPanel Este;
     private JPanel Centro;
-    private JTextArea areaEnunciado; // CAMBIO: labelEnunciado a areaEnunciado (JTextArea)
-    private JScrollPane scrollEnunciado; // Para el área del enunciado
+    private JTextArea areaEnunciado; 
+    private JScrollPane scrollEnunciado;
     private JLabel labelTiempo;
     private JLabel labelPreguntaNumero;
     private JLabel labelNivelTaxonomico;
@@ -68,7 +68,6 @@ public class PanelPrincipal extends JFrame {
         Norte = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Mantén FlowLayout si te funciona para los otros elementos
         labelPreguntaNumero = new JLabel();
 
-        // CAMBIO: Inicialización de areaEnunciado y scrollEnunciado
         areaEnunciado = new JTextArea(3, 40); // 3 filas, 40 columnas (se autoajustará con el layout)
         areaEnunciado.setEditable(false);
         areaEnunciado.setLineWrap(true);
@@ -87,7 +86,7 @@ public class PanelPrincipal extends JFrame {
         Norte.add(labelPreguntaNumero);
         Norte.add(Box.createHorizontalStrut(20)); // Espacio entre elementos
         Norte.add(new JLabel("Enunciado: "));
-        Norte.add(scrollEnunciado); // Añade el JScrollPane en lugar del JTextArea directamente
+        Norte.add(scrollEnunciado);
         Norte.add(Box.createHorizontalStrut(20));
         Norte.add(labelNivelTaxonomico);
 
@@ -181,7 +180,6 @@ public class PanelPrincipal extends JFrame {
         labelPreguntaNumero.setText("Pregunta " + (controlador.getIndicePreguntaActual() + 1) +
                 " de " + controlador.getTotalPreguntas());
 
-        // CAMBIO: Establecer texto en JTextArea y asegurar que el scroll esté al principio
         areaEnunciado.setText(preguntaActual.getEnunciado());
         areaEnunciado.setCaretPosition(0); // Muestra el texto desde el principio
 
@@ -239,7 +237,9 @@ public class PanelPrincipal extends JFrame {
 
         try {
             tiempoRestante = Integer.parseInt(preguntaActual.getTiempo());
-        } catch (NumberFormatException e) {
+        } 
+        
+        catch (NumberFormatException e) {
             tiempoRestante = 300; // 5 minutos por defecto si hay un error en el archivo
             System.err.println("Advertencia: Tiempo de pregunta inválido. Usando 300 segundos. " + e.getMessage());
         }
@@ -266,10 +266,14 @@ public class PanelPrincipal extends JFrame {
         if (preguntaActual != null && preguntaActual.getTipoPregunta() == 2) {
             if (selectedOption == 2) {
                 controlador.guardarJustificacion(areaJustificacion.getText().trim());
-            } else {
+            } 
+            
+            else {
                 controlador.guardarJustificacion("");
             }
-        } else {
+        } 
+        
+        else {
             controlador.guardarJustificacion("");
         }
     }
@@ -277,7 +281,9 @@ public class PanelPrincipal extends JFrame {
     private void avanzar() {
         if (controlador.esUltimaPregunta()) {
             entregarExamen();
-        } else {
+        } 
+        
+        else {
             controlador.avanzar();
             mostrarPreguntaActual();
         }
