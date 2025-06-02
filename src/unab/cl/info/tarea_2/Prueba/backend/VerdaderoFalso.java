@@ -50,7 +50,8 @@ public class VerdaderoFalso extends Item {
         this.justificacion = justificacion;
     }
 
+    // Si el usuario responde "Falso", debera poner una justificacion si o si.
     public boolean requiereJustificacion(int respuestaUsuario) {
-        return respuestaUsuario == 2; // Si el usuario responde "Falso"
+        return respuestaUsuario == 2; 
     }
 }
