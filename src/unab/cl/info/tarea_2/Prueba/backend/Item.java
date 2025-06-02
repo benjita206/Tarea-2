@@ -7,7 +7,7 @@ public class Item {
     private int nivelTaxonomico;
     private int tipoPregunta; // 1 = Alternativas, 2 = Verdadero/Falso
     private int cantidadAlternativas;
-    private String alternativas; // String con alternativas separadas por algún delimitador
+    private String alternativas; // String con alternativas separadas por el delimitador
     private int opcionCorrecta;
     private String tiempo;
     private ArrayList<String> opciones;
@@ -26,7 +26,7 @@ public class Item {
 
         // Procesar alternativas
         if (alternativas != null && !alternativas.isEmpty()) {
-            String[] altArray = alternativas.split(","); // Asumiendo que están separadas por comas
+            String[] altArray = alternativas.split(","); // Detectara las alternatibas por el delimitador ','
             for (String alt : altArray) {
                 this.opciones.add(alt.trim());
             }
@@ -103,11 +103,6 @@ public class Item {
 
     public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
-    }
-
-    public void iniciarTemporizador(){
-        // This method is currently empty.
-        // If it's meant to initiate a timer, its implementation would go here.
     }
 
     public int getCantidadAlternativas() {
