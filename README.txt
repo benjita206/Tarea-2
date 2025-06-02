@@ -30,7 +30,7 @@ Este proyecto implementa un sistema básico de examen interactivo utilizando Jav
 Para ejecutar el sistema de examen, sigue los siguientes pasos:
 
 1.  Requisitos:
-    * Java Development Kit (JDK) 8 o superior instalado.
+    * Java Development Kit (JDK) 23.
     * Un entorno de desarrollo integrado (IDE) como IntelliJ IDEA, Eclipse o VS Code con soporte para Java.
 
 2.  Configuración del Proyecto:
@@ -49,4 +49,47 @@ Para ejecutar el sistema de examen, sigue los siguientes pasos:
 
 El archivo de ítems debe ser un archivo de texto plano ('.csv') donde cada línea representa una pregunta individual. Los campos dentro de cada línea deben estar separados por un punto y coma (';').
 
+Descripción de los Campos:
+
+1.  'enunciado' (String):
+    * El texto completo de la pregunta.
+    * Importante: No debe contener el carácter ';' ya que es el delimitador principal y ',' ya que es el delimitador de las alternativas.
+
+2.  'nivelTaxonomico' (Integer):
+    * Un número entero que representa el nivel taxonómico de la pregunta.
+    * Valores: '1' a '6'.
+        * '1': Conocimiento
+        * '2': Comprensión
+        * '3': Aplicación
+        * '4': Análisis
+        * '5': Síntesis
+        * '6': Evaluación
+
+3.  'tipoPregunta' (Integer):
+    * Un número entero que indica el tipo de pregunta.
+    * Valores:
+        * '1': Pregunta de Alternativas (selección múltiple).
+        * '2': Pregunta de Verdadero/Falso.
+
+4.  'cantidadAlternativas' (Integer):
+    * El número total de opciones de respuesta para la pregunta.
+    * Para 'tipoPregunta = 1' (Alternativas): Debe coincidir con el número de opciones listadas en el campo 'alternativas'.
+    * Para 'tipoPregunta = 2' (Verdadero/Falso): Este valor siempre debe ser '2' (correspondiente a "Verdadero" y "Falso").
+
+5.  'alternativas' (String):
+    * Una cadena de texto que contiene todas las opciones de respuesta, separadas por comas (',').
+    * Ejemplo para Alternativas: 'Opción A,Opción B,Opción C,Opción D'
+    * Ejemplo para Verdadero/Falso: 'Verdadero,Falso'.
+    * Importante: No debe contener el carácter ';' (punto y coma).
+
+6.  'opcionCorrecta' (Integer):
+    * El número de la opción correcta, basado en la posición de las alternativas (1-indexed).
+    * Ejemplo para Alternativas: Si 'Opción C' es la correcta y está en tercer lugar, el valor sería '3'.
+    * Ejemplo para Verdadero/Falso:
+        * '1': Si la respuesta correcta es "Verdadero".
+        * '2': Si la respuesta correcta es "Falso".
+
+7.  'tiempo' (String):
+    * El tiempo asignado a esta pregunta en segundos. Es un String en el archivo, pero el programa lo convierte a entero.
+    * Ejemplo: '60' para 1 minuto, '120' para 2 minutos, '300' para 5 minutos.
 
