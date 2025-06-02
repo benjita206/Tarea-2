@@ -7,11 +7,6 @@ import java.util.ArrayList;
 public class Archivos {
     private ArrayList<Item> items;
 
-    public Archivos() {
-        items = new ArrayList<>();
-        this.abrirArchivo();
-    }
-
     public Archivos(String nombreArchivo) {
         items = new ArrayList<>();
         this.abrirArchivo(nombreArchivo);
@@ -19,10 +14,6 @@ public class Archivos {
 
     public ArrayList<Item> getItems() {
         return items;
-    }
-
-    public void abrirArchivo() {
-        abrirArchivo("archivos.txt");
     }
 
     public void abrirArchivo(String nombreArchivo) {
@@ -50,12 +41,16 @@ public class Archivos {
                             // Alternativas
                             nuevoItem = new Alternativas(enunciado, nivelTaxonomico, tipoPregunta,
                                     cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
-                        } else if (tipoPregunta == 2) {
+                        } 
+                        
+                        else if (tipoPregunta == 2) {
                             // Verdadero/Falso
                             nuevoItem = new VerdaderoFalso(enunciado, nivelTaxonomico, tipoPregunta,
                                     cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
-                        } else {
-                            // Item genérico (assuming Item's constructor can handle these parameters)
+                        } 
+                        
+                        else {
+                            // Item genérico
                             nuevoItem = new Item(enunciado, nivelTaxonomico, tipoPregunta,
                                     cantidadAlternativas, alternativas, opcionCorrecta, tiempo);
                         }
