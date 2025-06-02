@@ -25,6 +25,7 @@ public class ControladorExamen {
         }
     }
 
+    // Getter y Setters
     public Item getPreguntaActual() {
         if (preguntaActual >= 0 && preguntaActual < preguntas.size()) {
             return preguntas.get(preguntaActual);
@@ -44,11 +45,33 @@ public class ControladorExamen {
         return preguntas.size();
     }
 
-    // Nuevo getter para que PanelPrincipal pueda acceder a todas las preguntas
     public ArrayList<Item> getPreguntas() {
         return preguntas;
     }
 
+    public Integer getRespuestaActual() {
+        if (preguntaActual >= 0 && preguntaActual < respuestasUsuario.size()) {
+            return respuestasUsuario.get(preguntaActual);
+        }
+        return -1;
+    }
+
+    public String getJustificacionActual() {
+        if (preguntaActual >= 0 && preguntaActual < justificaciones.size()) {
+            return justificaciones.get(preguntaActual);
+        }
+        return "";
+    }
+
+    public ArrayList<Integer> getRespuestasUsuario() {
+        return respuestasUsuario;
+    }
+
+    public ArrayList<String> getJustificaciones() {
+        return justificaciones;
+    }
+
+    // Metodos de ControladorExamen
     public boolean puedeRetroceder() {
         return preguntaActual > 0;
     }
@@ -93,20 +116,6 @@ public class ControladorExamen {
         if (preguntaActual >= 0 && preguntaActual < justificaciones.size()) {
             justificaciones.set(preguntaActual, justificacion);
         }
-    }
-
-    public Integer getRespuestaActual() {
-        if (preguntaActual >= 0 && preguntaActual < respuestasUsuario.size()) {
-            return respuestasUsuario.get(preguntaActual);
-        }
-        return -1;
-    }
-
-    public String getJustificacionActual() {
-        if (preguntaActual >= 0 && preguntaActual < justificaciones.size()) {
-            return justificaciones.get(preguntaActual);
-        }
-        return "";
     }
 
     public boolean todasLasPreguntasRespondidas() {
@@ -190,13 +199,5 @@ public class ControladorExamen {
         }
 
         return stats;
-    }
-
-    public ArrayList<Integer> getRespuestasUsuario() {
-        return respuestasUsuario;
-    }
-
-    public ArrayList<String> getJustificaciones() {
-        return justificaciones;
     }
 }
